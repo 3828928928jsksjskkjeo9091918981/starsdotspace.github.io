@@ -3,22 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>stars</title>
+    <title>stars.space</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #000;
+            color: #fff;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             text-align: center;
         }
         header {
-            background-color: #6200ea;
-            color: white;
-            padding: 20px;
+            position: relative;
+            margin: 20px 0;
+        }
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #6200ea;
+            box-shadow: 0 0 20px rgba(98, 0, 234, 0.7);
+        }
+        h1 {
+            margin-top: 10px;
+            font-size: 2.5em;
         }
         .bio {
             margin: 20px 0;
+            font-size: 1.2em;
         }
         .links {
             list-style: none;
@@ -31,22 +44,32 @@
             text-decoration: none;
             color: #6200ea;
             font-weight: bold;
+            transition: color 0.3s;
         }
         a:hover {
-            text-decoration: underline;
+            color: #ff4081;
+        }
+        .visit-counter {
+            margin: 20px 0;
+            font-size: 1em;
+        }
+        footer {
+            margin-top: 40px;
+            font-size: 0.8em;
         }
     </style>
 </head>
 <body>
 
 <header>
+    <img src="https://media.discordapp.net/attachments/1284961545092333640/1289112962367356938/911cdc4ab1f300ab32216af809189ad2.jpg" alt="Profile Picture" class="profile-pic">
     <h1>stars.space</h1>
     <p>Lua Developer</p>
 </header>
 
 <div class="bio">
     <h2>About Me</h2>
-    <p>Hello, I am known as stars.space, You may know me from being a developer at AlSploit and Skid-Vape.</p>
+    <p>Hello, I am known as stars.space. You may know me from being a developer at AlSploit and Skid-Vape.</p>
 </div>
 
 <h2>Links</h2>
@@ -55,9 +78,20 @@
     <li><a href="https://github.com/galaxyvape" target="_blank">GitHub</a></li>
 </ul>
 
+<div class="visit-counter">
+    <p>Visited: <span id="visitCount">0</span> times</p>
+</div>
+
 <footer>
     <p>&copy; 2024 stars.space. All rights reserved.</p>
 </footer>
+
+<script>
+    let visitCount = localStorage.getItem('visitCount') || 0;
+    visitCount++;
+    localStorage.setItem('visitCount', visitCount);
+    document.getElementById('visitCount').innerText = visitCount;
+</script>
 
 </body>
 </html>
