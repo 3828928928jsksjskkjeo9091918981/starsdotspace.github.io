@@ -8,86 +8,72 @@
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: #000;
+            background: linear-gradient(135deg, #ff4081, #6200ea);
             color: #fff;
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             text-align: center;
-        }
-        header {
-            margin: 20px 0;
-        }
-        .profile-pic {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid #6200ea;
-            box-shadow: 0 0 20px rgba(98, 0, 234, 0.7);
-        }
-        h1 {
-            margin-top: 10px;
-            font-size: 2.5em;
-        }
-        .bio {
-            margin: 20px 0;
-            font-size: 1.2em;
-        }
-        .links {
-            list-style: none;
-            padding: 0;
-        }
-        .links li {
-            margin: 10px 0;
-        }
-        a {
-            text-decoration: none;
-            color: #6200ea;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-        a:hover {
-            color: #ff4081;
-        }
-        .visit-counter {
-            margin: 20px 0;
-            font-size: 1em;
-        }
-        footer {
-            margin-top: 40px;
-            font-size: 0.8em;
-        }
-        .music-btn {
-            display: inline-block;
-            background: linear-gradient(45deg, #ff4081, #6200ea);
-            color: white;
-            padding: 15px 30px;
-            font-size: 1.2em;
-            border-radius: 30px;
-            border: none;
-            cursor: pointer;
-            transition: background 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 4px 10px rgba(255, 64, 129, 0.5);
-        }
-        .music-btn:hover {
-            background: linear-gradient(45deg, #6200ea, #ff4081);
-            transform: scale(1.05);
-        }
-        .progress-container {
-            width: 80%;
-            height: 15px;
-            background-color: #2c2c2c;
-            border-radius: 10px;
-            margin: 20px auto;
-            box-shadow: 0 0 15px rgba(98, 0, 234, 0.5);
             overflow: hidden;
         }
-        .progress-bar {
-            height: 100%;
-            width: 0;
-            background: linear-gradient(45deg, #ff4081, #6200ea);
-            border-radius: 10px;
-            transition: width 0.1s ease;
+        header {
+            margin-bottom: 20px;
+        }
+        .profile-pic {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 6px solid #fff;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            font-size: 3em;
+            margin: 10px 0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+        .bio {
+            margin: 15px 0;
+            font-size: 1.4em;
+            line-height: 1.6;
+            max-width: 80%;
+        }
+        .links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .links a {
+            background-color: #fff;
+            color: #6200ea;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        .links a:hover {
+            background-color: #ff4081;
+            color: #fff;
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        .visit-counter {
+            margin-top: 40px;
+            font-size: 1.2em;
+            letter-spacing: 1px;
+        }
+        footer {
+            margin-top: auto;
+            font-size: 0.9em;
+            letter-spacing: 0.5px;
         }
     </style>
 </head>
@@ -104,23 +90,13 @@
     <p>Hello, I am known as stars.space. You may know me from being a developer at AlSploit and Skid-Vape.</p>
 </div>
 
-<h2>Links</h2>
-<ul class="links">
-    <li><a href="https://galaxyvape.github.io" target="_blank">Galaxyguard</a></li>
-    <li><a href="https://github.com/galaxyvape" target="_blank">GitHub</a></li>
-</ul>
+<div class="links">
+    <a href="https://galaxyvape.github.io" target="_blank">Galaxyguard</a>
+    <a href="https://github.com/galaxyvape" target="_blank">GitHub</a>
+</div>
 
 <div class="visit-counter">
-    <p>Visited: <span id="visitCount">0</span> times</p>
-</div>
-
-<div>
-    <button class="music-btn" id="playMusic">Play "Avoid Me"</button>
-    <audio id="audioPlayer" src="https://m.soundcloud.com/kutemane/avoid-me"></audio>
-</div>
-
-<div class="progress-container">
-    <div class="progress-bar" id="progressBar"></div>
+    <p>Visited: <span id="visitCount">0</span> times globally</p>
 </div>
 
 <footer>
@@ -128,29 +104,11 @@
 </footer>
 
 <script>
-    let visitCount = localStorage.getItem('visitCount') || 0;
-    visitCount++;
-    localStorage.setItem('visitCount', visitCount);
-    document.getElementById('visitCount').innerText = visitCount;
-
-    const playButton = document.getElementById('playMusic');
-    const audioPlayer = document.getElementById('audioPlayer');
-    const progressBar = document.getElementById('progressBar');
-
-    playButton.addEventListener('click', function() {
-        if (audioPlayer.paused) {
-            audioPlayer.play();
-            playButton.innerText = 'Pause "Avoid Me"';
-        } else {
-            audioPlayer.pause();
-            playButton.innerText = 'Play "Avoid Me"';
-        }
-    });
-
-    audioPlayer.addEventListener('timeupdate', function() {
-        const percentage = (audioPlayer.currentTime / audioPlayer.duration) * 100;
-        progressBar.style.width = percentage + '%';
-    });
+    fetch('https://api.countapi.xyz/hit/stars-space/global-views')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('visitCount').innerText = data.value;
+        });
 </script>
 
 </body>
