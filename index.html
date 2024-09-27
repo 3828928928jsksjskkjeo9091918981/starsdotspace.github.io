@@ -22,14 +22,27 @@
         }
         header {
             margin-bottom: 20px;
+            position: relative;
         }
         .profile-pic {
             width: 180px;
             height: 180px;
             border-radius: 50%;
             object-fit: cover;
-            border: 6px solid #fff;
+            border: 6px solid transparent;
             box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+        .profile-pic-container {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #ff4081, #6200ea);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            margin-bottom: 20px;
         }
         h1 {
             font-size: 3em;
@@ -80,7 +93,9 @@
 <body>
 
 <header>
-    <img src="https://assets3.thrillist.com/v1/image/3005223/1584x1632/scale;webp=auto;jpeg_quality=60.jpg" alt="Profile Picture" class="profile-pic">
+    <div class="profile-pic-container">
+        <img src="https://assets3.thrillist.com/v1/image/3005223/1584x1632/scale;webp=auto;jpeg_quality=60.jpg" alt="Profile Picture" class="profile-pic">
+    </div>
 </header>
 
 <h1>stars.space</h1>
