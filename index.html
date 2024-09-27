@@ -57,6 +57,38 @@
             margin-top: 40px;
             font-size: 0.8em;
         }
+        .music-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff4081, #6200ea);
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(255, 64, 129, 0.5);
+        }
+        .music-btn:hover {
+            background: linear-gradient(45deg, #6200ea, #ff4081);
+            transform: scale(1.05);
+        }
+        .progress-container {
+            width: 80%;
+            height: 15px;
+            background-color: #2c2c2c;
+            border-radius: 10px;
+            margin: 20px auto;
+            box-shadow: 0 0 15px rgba(98, 0, 234, 0.5);
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(45deg, #ff4081, #6200ea);
+            border-radius: 10px;
+            transition: width 0.1s ease;
+        }
     </style>
 </head>
 <body>
@@ -82,6 +114,15 @@
     <p>Visited: <span id="visitCount">0</span> times</p>
 </div>
 
+<div>
+    <button class="music-btn" id="playMusic">Play "Avoid Me"</button>
+    <audio id="audioPlayer" src="https://m.soundcloud.com/kutemane/avoid-me"></audio>
+</div>
+
+<div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+</div>
+
 <footer>
     <p>&copy; 2024 stars.space. All rights reserved.</p>
 </footer>
@@ -91,6 +132,25 @@
     visitCount++;
     localStorage.setItem('visitCount', visitCount);
     document.getElementById('visitCount').innerText = visitCount;
+
+    const playButton = document.getElementById('playMusic');
+    const audioPlayer = document.getElementById('audioPlayer');
+    const progressBar = document.getElementById('progressBar');
+
+    playButton.addEventListener('click', function() {
+        if (audioPlayer.paused) {
+            audioPlayer.play();
+            playButton.innerText = 'Pause "Avoid Me"';
+        } else {
+            audioPlayer.pause();
+            playButton.innerText = 'Play "Avoid Me"';
+        }
+    });
+
+    audioPlayer.addEventListener('timeupdate', function() {
+        const percentage = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+        progressBar.style.width = percentage + '%';
+    });
 </script>
 
 </body>
